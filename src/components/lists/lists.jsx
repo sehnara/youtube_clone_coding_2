@@ -2,14 +2,13 @@ import React from 'react';
 import List from '../list/list';
 import styles from './lists.module.css';
 
-const Lists = (props) => {
+const Lists = ({videos}) => {
     return(
         <ul className={styles.videos}>
         {
-            props.videos.map(video=>{
-                console.log(video.snippet.thumbnails.high.url)
+            videos.map(video=>{
                  return <List
-                    key = {video.id}
+                    key = {video.id} // 필요한 key빼고 나머지는 뭉텅이로 list.jsx에 보내는 거!!! GOOD
                     video = {video}
                 />
             })
