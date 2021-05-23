@@ -13,3 +13,9 @@
 .list {
   flex: 1 1 30%;
 }
+
+@media (max-width: 870px) {
+  .content {
+    flex-direction: column;
+  }
+}
