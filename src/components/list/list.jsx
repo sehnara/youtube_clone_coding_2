@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './list.module.css';
 
-const List = ({video, video:{snippet}, onVideoClick, display}) => { // ** deconstructing  
+const List = memo(({video, video:{snippet}, onVideoClick, display}) => { // ** deconstructing  
 
     const handleClick =()=>onVideoClick(video);
     const displayType = display === 'list'? styles.list: styles.grid;
@@ -19,6 +19,7 @@ const List = ({video, video:{snippet}, onVideoClick, display}) => { // ** decons
             </div>        
         </li>
     );
-};
+  }
+);
 
 export default List;

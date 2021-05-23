@@ -1,7 +1,7 @@
-import React, {useRef} from 'react';
+import React, {memo, useRef} from 'react';
 import styles from './input.module.css';
 
-const Input=({onSearch})=>{
+const Input= memo(({onSearch})=>{
     const inputRef = useRef();
     const handleSearch = () =>{
         const inputValue = inputRef.current.value;
@@ -16,28 +16,28 @@ const Input=({onSearch})=>{
     const onClick=()=>{
         handleSearch();
     }
-        return (
-            <div className={styles.container}>
-                <span className={styles.logo}><i className="fab fa-youtube"></i></span>
-                <span className={styles.title}>Itube</span>               
-                <input 
-                    className={styles.input}
-                    onKeyPress = {onKeyPress}
-                    ref={inputRef}
-                    type="search" 
-                    name="input" 
-                    id="input" 
-                    placeholder="  search..." 
-                />
-                <button 
-                    className={styles.submit}
-                    onClick = {onClick}
-                >
-                    <i className="fas fa-search"></i>
-                </button>
-            </div>
-        );
-   
-}
+    return (
+        <div className={styles.container}>
+            <span className={styles.logo}><i className="fab fa-youtube"></i></span>
+            <span className={styles.title}>Itube</span>               
+            <input 
+                className={styles.input}
+                onKeyPress = {onKeyPress}
+                ref={inputRef}
+                type="search" 
+                name="input" 
+                id="input" 
+                placeholder="  search..." 
+            />
+            <button 
+                className={styles.submit}
+                onClick = {onClick}
+            >
+                <i className="fas fa-search"></i>
+            </button>
+        </div>
+    );   
+  }
+);
 
 export default Input;

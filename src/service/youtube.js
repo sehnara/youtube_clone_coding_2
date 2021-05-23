@@ -1,34 +1,34 @@
+import axios from 'axios';
 class Youtube{
     constructor(key){
-        this.key = key;
-        this.getRequestOptions = {
-          method: 'GET',
-          redirect: 'follow'
-        };
+        this.youtube = axios.create({
+          baseURL: 'https://youtube.googleapis.com/youtube/v3',
+          params :{key:key},
+
+        })
     }
 
     mostPopular = async () =>{
-
-      try {
-        const response = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=26&key=${this.key}`, this.getRequestOptions);
-        const result_1 = await response.json();
-        return result_1.items;
-      } catch (error) {
-        return console.log('error', error);
-      }
+      const response = this.youtube.get('videos',{
+        params:{
+          part : 'snippet',
+          chart : 'mostPopular',
+          maxResults : 26,
+        }
+      });
+      return (await response).data.items;     
     }
 
     search = async (input)=>{
-      try {
-        const response = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/search?key=AIzaSyDGgWM2b6ovCQZJ77_AlhP5MKVWKr2gGEw&part=snippet&maxResults=25&q=${input}&type=video&key=${this.key}`, this.getRequestOptions);
-        const result_1 = await response.json();
-        const items = result_1.items.map((item) => ({ ...item, id: item.id.videoId }));
-        return items;
-      } catch (error) {
-        return console.log('error', error);
-      }
+      const response = this.youtube.get('videos',{
+        params:{
+          q : input,
+          part : 'snippet',
+          chart : 'search',
+          maxResults : 26,
+        }
+      })
+      return (await response).data.items;     
     }
 }
 

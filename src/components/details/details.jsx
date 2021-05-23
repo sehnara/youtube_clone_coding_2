@@ -2,10 +2,10 @@ import React from 'react';
 import styles from "./details.module.css"
 
 const Details = ({video , video:{snippet}}) => {
-
     return(
     <section className={styles.detail}>
         <iframe 
+            title = "youtube video player"
             id="ytplayer" 
             type="text/html" 
             width="100%" height="500px"
@@ -16,8 +16,8 @@ const Details = ({video , video:{snippet}}) => {
         <h2>{snippet.title}</h2>
         <h3>{snippet.channelTitle}</h3>
         <pre className={styles.description}> {snippet.description}</pre>
-    </section>
-    );
+    </section>    
+  );
 };
 
 export default Details;

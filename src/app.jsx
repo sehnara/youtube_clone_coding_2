@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from "./app.module.css";
 import Details from './components/details/details';
 import Lists from './components/lists/lists';
@@ -18,15 +18,21 @@ function App({youtube}){
   useEffect(()=>youtube
                   .mostPopular()
                   .then(videos => {
-                    setVideos(videos)}),[]);  
+                    setVideos(videos)}),[youtube]);  
   
   // 2) after searching, get API
-  const onSearch = input=>{
+  const onSearch = useCallback(input=>{
     setSelectedVideo(null);
     youtube
       .search(input)
       .then(videos => setVideos(videos));
-  };
+  },[youtube]); 
+  
+  // useCallback을 쓰면 메모리에 잡히기 때문에, 유의해서 써야한다. 
+  // search하면 videos props가 싹 바뀌기 떄문에, 
+  // memo 함수하더라도 input header가 계속 rerender되는 문제가 있다. 
+  // 이 때 useCallback쓴다.
+
     // [return sector]
   return (
     <div className={styles.app}>
