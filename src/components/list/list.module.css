@@ -36,3 +36,8 @@
 .channel {
   font-size: 0.6rem;
 }
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+}

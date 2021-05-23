@@ -20,15 +20,15 @@ class Youtube{
     }
 
     search = async (input)=>{
-      const response = this.youtube.get('videos',{
+      const response = this.youtube.get('search',{
         params:{
           q : input,
           part : 'snippet',
-          chart : 'search',
+          type : 'video',
           maxResults : 26,
         }
       })
-      return (await response).data.items;     
+      return (await response).data.items.map(item =>({...item, id :item.id.videoId}));     
     }
 }
 
